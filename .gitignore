@@ -1,0 +1,15 @@
+/target/
+/.classpath
+/.project
+/.settings
+/*.iml
+/.idea
+/base-parent/base-parent.iml
+/base-common/target/
+/base-common/base-common.iml
+/commons-base/target/
+/commons-base/commons-base.iml
+/commons-databse/target/
+/commons-databse/commons-databse.iml
+/commons-web-spring/commons-web-spring.iml
+/commons-web-spring/target/
