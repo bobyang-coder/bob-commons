@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bob.commons</groupId>
+        <artifactId>commons-parent</artifactId>
+        <version>${bob.project.version}</version>
+        <relativePath>../commons-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>commons-orderno-generator</artifactId>
+    <version>1.0.1</version>
+    <packaging>jar</packaging>
+
+    <description>
+        订单号生成器jar包
+        1.雪花算法
+    </description>
+
+</project>
