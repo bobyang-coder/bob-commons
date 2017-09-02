@@ -5,11 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.bob.commons</groupId>
-        <artifactId>base-parent</artifactId>
+        <artifactId>commons-parent</artifactId>
         <version>${bob.project.version}</version>
-        <relativePath>../base-parent/pom.xml</relativePath>
+        <relativePath>../commons-parent/pom.xml</relativePath>
     </parent>
-    <groupId>com.bob.commons</groupId>
     <artifactId>commons-base</artifactId>
     <version>${bob.project.version}</version>
     <packaging>jar</packaging>

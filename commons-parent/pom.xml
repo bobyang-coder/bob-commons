@@ -5,9 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bob.commons</groupId>
-    <artifactId>base-parent</artifactId>
+    <artifactId>commons-parent</artifactId>
     <version>${bob.project.version}</version>
     <packaging>pom</packaging>
+
+    <description>
+        父工程职责：
+        1.项目版本和依赖jar版本统一控制
+        2.提供所需jar包坐标，方便使用
+    </description>
 
     <!-- 集中定义依赖版本号 -->
     <properties>
