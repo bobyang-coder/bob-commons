@@ -8,7 +8,7 @@ import com.bob.commons.exception.BaseException;
  * @author bob   <bobyang_coder@163.com>
  * @since 2017/8/6
  */
-public class BaseRes {
+public class BaseRes<T> {
     /**
      * 响应码
      */
@@ -22,6 +22,11 @@ public class BaseRes {
      * 错误等级
      */
     private int level;
+
+    /**
+     * 响应数据
+     */
+    private T data;
 
     public BaseRes() {
     }
@@ -54,5 +59,13 @@ public class BaseRes {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

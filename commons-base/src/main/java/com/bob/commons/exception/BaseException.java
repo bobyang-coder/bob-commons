@@ -1,5 +1,7 @@
 package com.bob.commons.exception;
 
+import java.util.Map;
+
 /**
  * 基础异常类
  *
@@ -11,7 +13,7 @@ public class BaseException extends RuntimeException {
     /**
      * 错误码
      */
-    private int code;
+    private String code;
 
     /**
      * 错误信息
@@ -23,26 +25,29 @@ public class BaseException extends RuntimeException {
      */
     private int level;
 
+    private Map<String, Object> map;
+
     BaseException(ErrorCode errorCode) {
         this.code = errorCode.getCode();
         this.message = errorCode.getMessage();
         this.level = errorCode.getLevel();
     }
 
-    public BaseException(int code, String message, int level) {
+    public BaseException(String code, String message, int level) {
         this.code = code;
         this.message = message;
         this.level = level;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
@@ -57,5 +62,11 @@ public class BaseException extends RuntimeException {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+
+    public BaseException set(String key, Object obj) {
+        map.put(key, obj);
+        return this;
     }
 }

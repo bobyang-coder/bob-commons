@@ -1,7 +1,5 @@
 package com.bob.base.common.string;
 
-import java.util.regex.Pattern;
-
 /**
  * 针对字符串的工具类
  *
@@ -11,14 +9,5 @@ import java.util.regex.Pattern;
  */
 public class StringUtils {
 
-    /**
-     * 判断是否是手机号
-     *
-     * @param mobile
-     * @return
-     */
-    public static boolean isMobile(String mobile) {
-        String pMobile = "^(1(([34578][0-9])))\\d{8}$";
-        return Pattern.matches(pMobile, mobile);
-    }
+
 }

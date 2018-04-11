@@ -31,8 +31,14 @@
         <module>commons-base</module>
         <module>commons-databse</module>
         <module>commons-web-spring</module>
-        <module>commons-orderno-generator</module>
+        <module>commons-seq</module>
         <module>commons-distributed</module>
+        <module>commons-pdf</module>
+        <module>commons-doc</module>
+        <module>commons-excel</module>
+        <module>code-generator</module>
+        <module>mapper-generator</module>
+        <module>commons-http</module>
     </modules>
 
 

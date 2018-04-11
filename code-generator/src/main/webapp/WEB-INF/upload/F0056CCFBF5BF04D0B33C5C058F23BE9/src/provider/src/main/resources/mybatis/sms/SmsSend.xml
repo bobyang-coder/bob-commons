@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.reapal.sms.model.SmsSend">
+	<resultMap id="smsSendResultMap" type="SmsSend">
+        <result property="keyId" column="KEY_ID"/>
+        <result property="smsType" column="SMS_TYPE"/>
+        <result property="phone" column="PHONE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="channelId" column="CHANNEL_ID"/>
+        <result property="channelStatus" column="CHANNEL_STATUS"/>
+        <result property="sendDateTime" column="SEND_DATE_TIME"/>
+        <result property="createUserId" column="CREATE_USER_ID"/>
+        <result property="createDateTime" column="CREATE_DATE_TIME"/>
+	</resultMap>
+	
+	<!-- 用于select查询公用抽取的列 -->
+	<sql id="SmsSendColumns">
+	    <![CDATA[
+		KEY_ID,SMS_TYPE,PHONE,CONTENT,CHANNEL_ID,CHANNEL_STATUS,SEND_DATE_TIME,CREATE_USER_ID,CREATE_DATE_TIME
+	    ]]>
+	</sql>
+
+	<!-- useGeneratedKeys="true" keyProperty="xxx" for sqlserver and mysql -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="keyId">
+        	<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="keyId">
+			SELECT SEQ_SMS_SEND.nextval AS ID FROM DUAL 
+        	</selectKey>
+    <![CDATA[
+        INSERT INTO SMS_SEND (
+        	KEY_ID ,
+        	SMS_TYPE ,
+        	PHONE ,
+        	CONTENT ,
+        	CHANNEL_ID ,
+        	CHANNEL_STATUS ,
+        	SEND_DATE_TIME ,
+        	CREATE_USER_ID ,
+        	CREATE_DATE_TIME 
+        ) VALUES (
+        	#{keyId,jdbcType=DECIMAL},
+        	#{smsType,jdbcType=VARCHAR},
+        	#{phone,jdbcType=VARCHAR},
+        	#{content,jdbcType=VARCHAR},
+        	#{channelId,jdbcType=VARCHAR},
+        	#{channelStatus,jdbcType=VARCHAR},
+        	#{sendDateTime,jdbcType=DATE},
+        	#{createUserId,jdbcType=VARCHAR},
+        	
+        	sysdate
+        )
+    ]]>
+		<!--	
+		
+			oracle: order="BEFORE" SELECT sequenceName.nextval AS ID FROM DUAL 
+			DB2: order="BEFORE"" values nextval for sequenceName
+		<selectKey resultType="java.lang.Long" order="BEFORE" keyProperty="userId">
+			SELECT sequenceName.nextval AS ID FROM DUAL 
+        </selectKey>
+		-->
+	</insert>
+    
+	<update id="update" >
+        UPDATE SMS_SEND SET
+	        <if test="smsType!=null">
+	        SMS_TYPE = #{smsType,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="phone!=null">
+	        PHONE = #{phone,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="content!=null">
+	        CONTENT = #{content,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="channelId!=null">
+	        CHANNEL_ID = #{channelId,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="channelStatus!=null">
+	        CHANNEL_STATUS = #{channelStatus,jdbcType=VARCHAR} ,
+	        </if>
+	        <if test="sendDateTime!=null">
+	        SEND_DATE_TIME = #{sendDateTime,jdbcType=DATE} ,
+	        </if>
+        WHERE 
+	        KEY_ID = #{keyId} 
+	</update>
+
+    <delete id="delete">
+    <![CDATA[
+        DELETE FROM SMS_SEND WHERE
+        KEY_ID = #{id} 
+    ]]>
+    </delete>
+    
+    <select id="getById" resultMap="smsSendResultMap">
+		SELECT <include refid="SmsSendColumns" />
+	    <![CDATA[
+		    FROM SMS_SEND 
+	        WHERE 
+		        KEY_ID = #{id} 
+	    ]]>
+	</select>
+	
+	<sql id="listSmsSendWhere">
+		<!-- ognl访问静态方法的表达式 为@class@method(args),以下为调用rapid中的Ognl.isNotEmpty()方法,还有其它方法如isNotBlank()可以使用，具体请查看Ognl类 -->
+		<where>      				
+	       	<if test="keyWord!=null and keyWord!=''">
+				AND (KEY_ID like CONCAT(CONCAT('%', #{keyWord}),'%') or KEY_ID like CONCAT(CONCAT('%', #{keyWord}),'%'))
+			</if>
+	       	<if test="keyId!=null and keyId!=''">
+				AND KEY_ID = #{keyId}
+			</if>
+	       	<if test="smsType!=null and smsType!=''">
+				AND SMS_TYPE = #{smsType}
+			</if>
+	       	<if test="phone!=null and phone!=''">
+				AND PHONE = #{phone}
+			</if>
+	       	<if test="content!=null and content!=''">
+				AND CONTENT = #{content}
+			</if>
+	       	<if test="channelId!=null and channelId!=''">
+				AND CHANNEL_ID = #{channelId}
+			</if>
+	       	<if test="channelStatus!=null and channelStatus!=''">
+				AND CHANNEL_STATUS = #{channelStatus}
+			</if>
+	       	<if test="sendDateTime!=null and sendDateTime!=''">
+				AND SEND_DATE_TIME = #{sendDateTime}
+			</if>
+	       	<if test="createUserId!=null and createUserId!=''">
+				AND CREATE_USER_ID = #{createUserId}
+			</if>
+	       	<if test="createDateTime!=null and createDateTime!=''">
+				AND CREATE_DATE_TIME = #{createDateTime}
+			</if>
+		</where>
+	</sql>
+		
+    <select id="getCountSmsSend" resultType="int">
+        SELECT count(*) FROM SMS_SEND 
+		<include refid="listSmsSendWhere"/>
+    </select>
+    
+    <!--
+    	分页查询已经使用Dialect进行分页,也可以不使用Dialect直接编写分页
+    	因为分页查询将传 offset,pageSize,lastRows 三个参数,不同的数据库可以根于此三个参数属性应用不同的分页实现
+    -->
+    <select id="listSmsSend" resultMap="smsSendResultMap">
+    	SELECT <include refid="SmsSendColumns" />
+	    FROM SMS_SEND 
+		<include refid="listSmsSendWhere"/>
+    </select>
+
+	
+</mapper>
+

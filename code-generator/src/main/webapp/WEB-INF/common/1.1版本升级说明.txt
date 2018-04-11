@@ -1,0 +1,14 @@
+升级功能：批次精确到职称类别
+
+升级内容
+	1、数据表   batchId字段长度扩展到10位
+	2、数据表   review_batch  增加字段  Review_Type
+	3、参数表   “当前批次” 变更为 “当前年度”
+	4、数据升级
+		变更批次号
+		update review_quota set Batch_ID=CONCAT(Batch_ID,left(Review_Type,3),"0") where LENGTH(Batch_ID)<10
+		update review_print set Batch_ID=CONCAT(Batch_ID,left(Review_Type,3),"0") where LENGTH(Batch_ID)<10
+
+		查询2013年新批次，手工添加
+		INSERT INTO review_batch (batch_id,batch_year,turn_no,review_type,delete_flag,batch_status) 
+		SELECT DISTINCT Batch_ID,LEFT (Batch_ID, 4),SUBSTR(Batch_ID, 5, 2),RIGHT (Batch_ID, 4),'1','2' FROM review_quota WHERE LEFT (Batch_ID, 4) = '2013'
