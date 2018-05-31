@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
-    <description>bob架构之base项目</description>
+    <description>bil架构之base项目</description>
 
     <developers>
         <developer>
@@ -29,7 +29,7 @@
         <module>commons-parent</module>
         <module>commons-utils</module>
         <module>commons-base</module>
-        <module>commons-databse</module>
+        <module>commons-jdbc</module>
         <module>commons-web-spring</module>
         <module>commons-seq</module>
         <module>commons-distributed</module>

@@ -6,7 +6,7 @@
 
     <groupId>com.bob.commons</groupId>
     <artifactId>commons-parent</artifactId>
-    <version>${bob.project.version}</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <description>
@@ -17,7 +17,7 @@
 
     <!-- 集中定义依赖版本号 -->
     <properties>
-        <bob.project.version>1.0.0</bob.project.version>
+        <project.version>1.0.0</project.version>
         <junit.version>4.12</junit.version>
         <spring.version>4.3.10.RELEASE</spring.version>
         <mybatis.version>3.4.1</mybatis.version>
@@ -48,7 +48,18 @@
         <activemq.version>5.11.2</activemq.version>
         <freemarker.version>2.3.23</freemarker.version>
         <quartz.version>2.2.2</quartz.version>
+
+
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <!-- 时间操作组件 -->
