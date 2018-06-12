@@ -1,7 +1,7 @@
 package com.bob.commons.response.web;
 
+import com.bob.commons.exception.BaseErrorEnum;
 import com.bob.commons.exception.BaseException;
-import com.bob.commons.exception.ErrorCode;
 import com.bob.commons.response.BaseRes;
 
 /**
@@ -22,9 +22,9 @@ public class JsonWebRes extends BaseRes {
             super.setMessage(ex.getMessage());
             super.setLevel(ex.getLevel());
         } else {
-            super.setCode(ErrorCode.SYSTEM_ERROR.getCode());
-            super.setMessage(ErrorCode.SYSTEM_ERROR.getMessage());
-            super.setLevel(ErrorCode.SYSTEM_ERROR.getLevel());
+            super.setCode(BaseErrorEnum.SYSTEM_ERROR.getCode());
+            super.setMessage(BaseErrorEnum.SYSTEM_ERROR.getMessage());
+            super.setLevel(BaseErrorEnum.SYSTEM_ERROR.getLevel());
         }
     }
 

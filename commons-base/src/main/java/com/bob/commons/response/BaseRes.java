@@ -12,7 +12,7 @@ public class BaseRes<T> {
     /**
      * 响应码
      */
-    private int code;
+    private String code;
     /**
      * 响应信息
      */
@@ -37,11 +37,11 @@ public class BaseRes<T> {
         this.level = ex.getLevel();
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
